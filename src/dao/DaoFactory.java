@@ -10,12 +10,13 @@ import java.util.List;
 /**
  * Created by panyunyi on 2017/5/3.
  */
-class DaoFactory<T> {
+class DaoFactory<T> extends Dao<T>{
 
     /*
 * function：增加
 * param：实体类对象
 * */
+    @Override
     public boolean save(T u) {
         String i;
 
@@ -50,6 +51,7 @@ class DaoFactory<T> {
     * function：删除
     * param：实体类对象
     * */
+    @Override
     public boolean delete(T u) {
         String info;
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -83,6 +85,7 @@ class DaoFactory<T> {
     * function：更新
     * param：实体类对象
     * */
+    @Override
     public boolean update(T u) {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build();
@@ -106,7 +109,7 @@ class DaoFactory<T> {
         }
         return true;
     }
-
+@Override
     public List cursor(T u, String s, Class aclass) {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml").build();

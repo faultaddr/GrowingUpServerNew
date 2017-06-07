@@ -10,6 +10,9 @@ import java.util.List;
  * Created by panyunyi on 2017/5/2.
  * use for adding/deleting/updating members
  */
+
+
+
 public class GUsersDao {
 
     public boolean add(GUserEntity GUserEntity) {
@@ -32,7 +35,7 @@ public class GUsersDao {
     * @return：布尔值
     *
     * */
-    public boolean login(GUserEntity GUserEntity) {
+    public GUserEntity login(GUserEntity GUserEntity) {
         String userId = GUserEntity.getUserId();
         String passWord = GUserEntity.getUserPassword();
         DaoFactory<GUserEntity> daoFactory = new DaoFactory<>();
@@ -44,10 +47,10 @@ public class GUsersDao {
 //        if (list.size() != 0) return true;
         if(list.size()!=0){
             if(list.get(0).getUserPassword().equals(passWord)){
-                return true;
+                return list.get(0);
             }
         }
-        return false;
+        return null;
 }
 
     /*
