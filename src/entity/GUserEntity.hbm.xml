@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entity.GUserEntity" table="g_user" schema="growingup">
+        <id name="userId">
+            <column name="user_Id" sql-type="varchar(15)" length="15"/>
+        </id>
+        <property name="userName">
+            <column name="user_name" sql-type="varchar(30)" length="30" />
+        </property>
+        <property name="userPassword">
+            <column name="user_password" sql-type="varchar(30)" length="30" />
+        </property>
+        <property name="userWechat">
+            <column name="user_wechat" sql-type="varchar(30)" length="30" />
+        </property>
+        <property name="userAlipay">
+            <column name="user_alipay" sql-type="varchar(30)" length="30" />
+        </property>
+        <property name="userTelephoneNumber">
+            <column name="user_telephone_number" sql-type="varchar(11)" length="11" />
+        </property>
+        <property name="userGrade">
+            <column name="user_grade" sql-type="varchar(4)" length="4"/>
+        </property>
+        <property name="userClass">
+            <column name="user_class" sql-type="varchar(20)" length="20" />
+        </property>
+        <property name="userInstitution">
+            <column name="user_institution" sql-type="varchar(30)" length="30"/>
+        </property>
+        <property name="userRole">
+            <column name="user_role" sql-type="varchar(4)" length="4" />
+        </property>
+    </class>
+</hibernate-mapping>
