@@ -21,6 +21,8 @@
           <element id="library" level="project" name="Java EE 6-Java EE 6" />
           <element id="library" level="project" name="mysql-connector-java-5.1.39-bin" />
           <element id="library" level="project" name="bcprov-jdk16-1.45" />
+          <element id="library" level="project" name="jackson-annotations-2.2.1" />
+          <element id="library" level="project" name="jackson-databind-2.5.2" />
         </element>
       </element>
     </root>
