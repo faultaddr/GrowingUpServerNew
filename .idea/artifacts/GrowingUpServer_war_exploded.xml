@@ -23,6 +23,7 @@
           <element id="library" level="project" name="bcprov-jdk16-1.45" />
           <element id="library" level="project" name="jackson-annotations-2.2.1" />
           <element id="library" level="project" name="jackson-databind-2.5.2" />
+          <element id="library" level="project" name="fastjson-1.2.34" />
         </element>
       </element>
     </root>

@@ -1,7 +1,11 @@
 package controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import dao.GUsersDao;
 import entity.GUserEntity;
+import entity.User;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import util.RSAUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -25,8 +32,7 @@ import java.security.interfaces.RSAPublicKey;
 @Controller
 public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    @ResponseBody
-    public String loginUserGet(HttpServletRequest request, @RequestParam("userId") String userId, @RequestParam("password") String password, ModelMap modelMap) {
+    public void loginUserGet(HttpServletRequest request, @RequestParam("userId") String userId, @RequestParam("password") String password, ModelMap modelMap, HttpServletResponse response) {
 
         GUserEntity guserEntity = new GUserEntity();
         GUsersDao gUsersDao = new GUsersDao();
@@ -35,18 +41,42 @@ public class UserController {
         GUserEntity result = gUsersDao.login(guserEntity);
         //TODO 判断是否为管理员进入管理后台或者显示正常页面
         if (result != null) {
-            modelMap.addAttribute("user", result);
-            return "true";
+            String jsonString = JSON.toJSONString(result);
+            System.out.print(jsonString);
+            PrintWriter pw =null;
+            try {
+                pw =response .getWriter();
+                pw.write(jsonString);
+                pw.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally {
+                pw.close();
+            }
+
         } else
-            return "false";
+            try {
+                PrintWriter pw=response.getWriter();
+                pw.write("false");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void loginUserPost(HttpServletRequest request, @RequestBody GUserEntity userEntity, ModelMap modelMap) {
-
+    public void loginUserPost(HttpServletRequest request, @RequestBody User userEntity, ModelMap modelMap,HttpServletResponse response) {
+        System.out.println(userEntity.getUserId());
+        System.out.println(userEntity.getUserPassword());
         if (userEntity.getUserId() != null && userEntity.getUserPassword() != null)
-            loginUserGet(request, userEntity.getUserId(), userEntity.getUserPassword(), modelMap);
-
+            loginUserGet(request, userEntity.getUserId(), userEntity.getUserPassword(), modelMap,response);
+        else
+            try {
+                PrintWriter pw=response.getWriter();
+                pw.write("false");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     @RequestMapping("/register")
