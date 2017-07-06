@@ -10,12 +10,17 @@ import java.util.List;
 /**
  * Created by panyunyi on 2017/5/3.
  */
-class DaoFactory<T> extends Dao<T>{
+public class DaoFactory<T> extends Dao<T>{
+    public DaoFactory() {
+    }
+
 
     /*
 * function：增加
 * param：实体类对象
 * */
+
+
     @Override
     public boolean save(T u) {
         String i;

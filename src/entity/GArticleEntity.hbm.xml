@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entity.GArticleEntity" table="g_article" schema="growingup">
+        <id name="articleId">
+            <column name="article_id" sql-type="varchar(15)" length="15"/>
+        </id>
+        <property name="articleContent">
+            <column name="article_content" sql-type="varchar(10000)" length="10000" not-null="false"/>
+        </property>
+        <property name="articleDate">
+            <column name="article_date" sql-type="varchar(8)" length="8" not-null="false"/>
+        </property>
+        <property name="articleType">
+            <column name="article_type" sql-type="varchar(4)" length="4" not-null="false"/>
+        </property>
+    </class>
+</hibernate-mapping>
