@@ -96,6 +96,7 @@ public class ContentController {
             String jsonArray = JSON.toJSONString(list);
             PrintWriter printWriter = null;
             try {
+                response.setCharacterEncoding("utf-8");
                 printWriter = response.getWriter();
             } catch (IOException e) {
                 e.printStackTrace();
