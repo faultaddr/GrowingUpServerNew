@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entity.GTimeEntity" table="g_time" schema="growingup">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="teacherId">
+            <column name="teacher_id" sql-type="varchar(16)" length="16" not-null="true"/>
+        </property>
+        <property name="timeDetail">
+            <column name="time_detail" sql-type="varchar(16)" length="16" not-null="true"/>
+        </property>
+        <property name="timeStatus">
+            <column name="time_status" sql-type="varchar(4)" length="4" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
