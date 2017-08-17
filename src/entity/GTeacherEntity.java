@@ -1,13 +1,14 @@
 package entity;
 
 /**
- * Created by panyunyi on 2017/8/3.
+ * Created by panyunyi on 2017/8/5.
  * CUFE cs14
  */
 public class GTeacherEntity {
     private String teacherId;
     private String teacherName;
     private String teacherMajor;
+    private String teacherMobileNumber;
 
     public String getTeacherId() {
         return teacherId;
@@ -33,6 +34,14 @@ public class GTeacherEntity {
         this.teacherMajor = teacherMajor;
     }
 
+    public String getTeacherMobileNumber() {
+        return teacherMobileNumber;
+    }
+
+    public void setTeacherMobileNumber(String teacherMobileNumber) {
+        this.teacherMobileNumber = teacherMobileNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,6 +52,8 @@ public class GTeacherEntity {
         if (teacherId != null ? !teacherId.equals(that.teacherId) : that.teacherId != null) return false;
         if (teacherName != null ? !teacherName.equals(that.teacherName) : that.teacherName != null) return false;
         if (teacherMajor != null ? !teacherMajor.equals(that.teacherMajor) : that.teacherMajor != null) return false;
+        if (teacherMobileNumber != null ? !teacherMobileNumber.equals(that.teacherMobileNumber) : that.teacherMobileNumber != null)
+            return false;
 
         return true;
     }
@@ -52,6 +63,7 @@ public class GTeacherEntity {
         int result = teacherId != null ? teacherId.hashCode() : 0;
         result = 31 * result + (teacherName != null ? teacherName.hashCode() : 0);
         result = 31 * result + (teacherMajor != null ? teacherMajor.hashCode() : 0);
+        result = 31 * result + (teacherMobileNumber != null ? teacherMobileNumber.hashCode() : 0);
         return result;
     }
 }

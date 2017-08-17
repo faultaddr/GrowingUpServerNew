@@ -70,28 +70,26 @@ public class UserController {
         System.out.println(userEntity.getUserPassword());
         if (userEntity.getUserId() != null && userEntity.getUserPassword() != null)
             loginUserGet(request, userEntity.getUserId(), userEntity.getUserPassword(), modelMap,response);
-        else
+        else{
             try {
                 PrintWriter pw=response.getWriter();
                 pw.write("false");
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
     }
 
     @RequestMapping("/register")
     @ResponseBody
-    public String RegisterUser(@RequestParam("userId") String userId, @RequestParam("password") String password, ModelMap modelMap) {
-        GUserEntity gUsersEntity = new GUserEntity();
-        GUsersDao gUsersDao = new GUsersDao();
-        gUsersEntity.setUserId(userId);
-        gUsersEntity.setUserPassword(password);
+    public void RegisterUser(@RequestBody GUserEntity gUserEntity ,ModelMap modelMap,HttpServletResponse response) {
 
-        boolean result = gUsersDao.add(gUsersEntity);
+        GUsersDao gUsersDao = new GUsersDao();
+        boolean result = gUsersDao.add(gUserEntity);
         if (result) {
-            return "success";
+            TeacherController.printMessage(response,"true");
         } else
-            return "error";
+            TeacherController.printMessage(response,"false");
 
     }
 

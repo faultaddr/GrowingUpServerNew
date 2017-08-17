@@ -3,6 +3,7 @@ package controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import entity.GArticleEntity;
+import entity.GFeedbackEntity;
 import entity.GPersonEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import service.ArticleService;
+import service.FeedBackService;
 import service.PersonService;
 
 import javax.jws.WebParam;
@@ -66,10 +68,12 @@ public class ContentController {
             return "/jsp/error.jsp";
     }
 
-    @RequestMapping(value = "/deleteArticle", method = RequestMethod.POST)
-    public String deleteArticle(HttpServletResponse response, @RequestBody GArticleEntity gArticleEntity, HttpServletRequest request, ModelMap modelMap) {
+    @RequestMapping(value = "/deleteArticle")
+    public String deleteArticle(HttpServletResponse response, @RequestParam String articleId, HttpServletRequest request, ModelMap modelMap) {
         ArticleService articleService = new ArticleService();
-        boolean result = articleService.delete(gArticleEntity);
+        GArticleEntity articleEntity=new GArticleEntity();
+        articleEntity.setArticleId(articleId);
+        boolean result = articleService.delete(articleEntity);
         if (result)
             return "/jsp/success.jsp";
         else
@@ -90,7 +94,7 @@ public class ContentController {
 
     public String showArticle(@RequestParam(value = "num", required = false) String num, HttpServletResponse response, HttpServletRequest request, ModelMap modelMap) {
 
-        if (num==null) {
+        if (num == null) {
             ArticleService articleService = new ArticleService();
             List list = articleService.cursor();
             String jsonArray = JSON.toJSONString(list);
@@ -108,10 +112,42 @@ public class ContentController {
             return "/html/news/" + num + ".html";
         }
     }
+    @RequestMapping(value = "/showArticleAll")
+    public String showAllArticle(HttpServletResponse response,HttpServletRequest request){
+        response.setCharacterEncoding("utf-8");
 
+        return "/html/detail/detail.html";
+    }
     @RequestMapping(value = "/showThinkingActivity", method = RequestMethod.GET)
     public String showThinkingHtml(String num, HttpServletResponse response) {
         response.setCharacterEncoding("utf-8");
         return "/html/thinking/" + num + ".html";
     }
+
+    @RequestMapping(value = "/addFeedBack", method = RequestMethod.POST)
+    public void addFeedBack(@RequestBody GFeedbackEntity gFeedbackEntity, HttpServletResponse response) {
+        response.setCharacterEncoding("utf-8");
+        FeedBackService feedBackService = new FeedBackService();
+        boolean result = feedBackService.add(gFeedbackEntity);
+
+
+        if (result) {
+            PrintWriter printWriter = null;
+            try {
+                printWriter = response.getWriter();
+                printWriter.write("true");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            try {
+                PrintWriter printWriter = response.getWriter();
+                printWriter.write("false");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

@@ -14,5 +14,8 @@
         <property name="teacherMajor">
             <column name="teacher_major" sql-type="varchar(64)" length="64" not-null="true"/>
         </property>
+        <property name="teacherMobileNumber">
+            <column name="teacher_mobile_number" sql-type="varchar(16)" length="16" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entity.GFeedbackEntity" table="g_feedback" schema="growingup">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="feedbackContent">
+            <column name="feedback_content" sql-type="text" not-null="true"/>
+        </property>
+        <property name="feedbackTitle">
+            <column name="feedback_title" sql-type="varchar(100)" length="100" not-null="true"/>
+        </property>
+        <property name="userId">
+            <column name="user_Id" sql-type="varchar(15)" length="15"/>
+        </property>
+        <property name="feedbackTime">
+            <column name="feedback_time" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

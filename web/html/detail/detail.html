@@ -1,0 +1,72 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>index</title>
+    <link rel="stylesheet" href="/html/css/haidaxue.min.css" />
+    <link rel="stylesheet" href="/html/css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="/html/css/index.css" />
+    <link rel="stylesheet"
+          href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script
+            src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+        function getAllArticles(){
+            $.ajax({
+                url: "/showArticle",  //servlet mapping + 传参  ——  servlet中request.get获取
+                type: "post",
+                dataType: "json",
+                timeout: 1000,
+                cache: false,
+                async: false,
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                },  //错误执行方法
+                success: showArticleList //成功执行方法
+            });
+        }
+
+        function showArticleList(data){
+            if(data == null){     //data返回值内容  servlet中用response.set来返回  还要定义好response头
+                alert(" 暂无信息");
+            }
+            else if(data == ""){
+                alert("暂无信息")
+            }
+            else{
+
+                var json = eval(data);
+
+                $.each(json, function(index, item){
+                    //alert(json[index].questionSn) //循环获取数据
+                    /*            $("#showUUU").append($("<li><a href = 'questionDetail.jsp?question_sn="+json[index].questionSn>+"'><img src = '../images/"+json[index].questionContent+"' />"+
+                     "<h2>"+json[index].questionLabel+"</h2>"+
+                     "<p>"+json[index].questionSn+"</p>"+"</li>"));*/
+                    $("#showUUU").append($("<li><a data-ajax='false' href = '/showArticle?num="+json[index].articleId+"' >"+
+                        "<p>"+json[index].articleContent+"</p></a></li>"));
+                });//forEach
+                $("#showUUU").listview('refresh');
+                $("#showUUU").find("li:last").slideDown(300);
+            }//else
+        }//function
+    </script>
+
+
+</head>
+<body onload="getAllArticles()">
+<div data-role="ui-content">
+    <ul data-role="listview" id = "showUUU">
+        <!-- 商品循环开始 -->
+
+    </ul>
+
+</div>
+
+
+
+</body>
+
+

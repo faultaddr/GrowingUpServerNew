@@ -6,6 +6,12 @@ import entity.GTimeEntity;
 import java.util.List;
 
 public class TimeService {
+    public static TimeService timeService;
+    public static TimeService newInstance() {
+        if(timeService==null)
+            return new TimeService();
+        else return timeService;
+    }
     public boolean add(GTimeEntity gTimeEntity){
         DaoFactory<GTimeEntity> daoFactory=new DaoFactory<GTimeEntity>();
         return daoFactory.save(gTimeEntity);

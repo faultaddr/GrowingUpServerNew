@@ -11,6 +11,8 @@ import java.util.List;
  * Created by panyunyi on 2017/5/3.
  */
 public class DaoFactory<T> extends Dao<T>{
+    final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+            .configure("hibernate.cfg.xml").build();
     public DaoFactory() {
     }
 
@@ -25,8 +27,6 @@ public class DaoFactory<T> extends Dao<T>{
     public boolean save(T u) {
         String i;
 
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure("hibernate.cfg.xml").build();
         // 2. 根据服务注册类创建一个元数据资源集，同时构建元数据并生成应用一般唯一的的session工厂
         SessionFactory sessionFactory = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory();
@@ -35,7 +35,7 @@ public class DaoFactory<T> extends Dao<T>{
         try {
             // 从会话工厂获取一个session
             t = session.beginTransaction();
-            i = (String) session.save(u);
+            //i = String.valueOf(session.save(u));
             t.commit();
         } catch (HibernateException herror) {
             t.rollback();
@@ -59,8 +59,7 @@ public class DaoFactory<T> extends Dao<T>{
     @Override
     public boolean delete(T u) {
         String info;
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure("hibernate.cfg.xml").build();
+
         // 2. 根据服务注册类创建一个元数据资源集，同时构建元数据并生成应用一般唯一的的session工厂
         SessionFactory sessionFactory = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory();
@@ -92,8 +91,7 @@ public class DaoFactory<T> extends Dao<T>{
     * */
     @Override
     public boolean update(T u) {
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure("hibernate.cfg.xml").build();
+
         // 2. 根据服务注册类创建一个元数据资源集，同时构建元数据并生成应用一般唯一的的session工厂
         SessionFactory sessionFactory = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory();
@@ -116,8 +114,7 @@ public class DaoFactory<T> extends Dao<T>{
     }
 @Override
     public List cursor(T u, String s, Class aclass) {
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure("hibernate.cfg.xml").build();
+
         // 2. 根据服务注册类创建一个元数据资源集，同时构建元数据并生成应用一般唯一的的session工厂
         SessionFactory sessionFactory = new MetadataSources(registry)
                 .buildMetadata().buildSessionFactory();
