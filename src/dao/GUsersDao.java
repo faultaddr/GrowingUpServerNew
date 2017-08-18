@@ -68,7 +68,7 @@ public class GUsersDao {
     public List<GUserEntity> list() {
         GUserEntity GUserEntity = new GUserEntity();
         DaoFactory<GUserEntity> daoFactory = new DaoFactory<>();
-        List<GUserEntity> result = daoFactory.cursor(GUserEntity, "select * from h_users", GUserEntity.class);
+        List<GUserEntity> result = daoFactory.cursor(GUserEntity, "select * from g_user", GUserEntity.class);
 
         return result;
 

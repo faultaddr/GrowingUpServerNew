@@ -14,6 +14,7 @@ import util.RSAUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.KeyPair;
@@ -21,6 +22,7 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.List;
 
 /**
  * Created by panyu on 2017/5/24.
@@ -39,8 +41,12 @@ public class UserController {
         guserEntity.setUserId(userId);
         guserEntity.setUserPassword(password);
         GUserEntity result = gUsersDao.login(guserEntity);
+        HttpSession session=request.getSession();
+
+
         //TODO 判断是否为管理员进入管理后台或者显示正常页面
         if (result != null) {
+            session.setAttribute("user",result);
             String jsonString = JSON.toJSONString(result);
             System.out.print(jsonString);
             PrintWriter pw =null;
@@ -112,6 +118,15 @@ public class UserController {
     @ResponseBody
     public String updateUser(ModelMap modelMap) {
         return "update";
+    }
+
+
+    @RequestMapping("/showAllUser")
+    public void showUser(HttpServletResponse response,HttpServletRequest request){
+        GUsersDao gUsersDao=new GUsersDao();
+        List <GUserEntity> list=gUsersDao.list();
+        String jsonArray = JSON.toJSONString(list);
+        TeacherController.printMessage(response,jsonArray);
     }
 }
 
