@@ -149,5 +149,12 @@ public class ContentController {
             }
         }
     }
+    @RequestMapping("/showAllFeedBack")
+    public void showFeedBack(HttpServletRequest request,HttpServletResponse response){
+        FeedBackService feedBackService=new FeedBackService();
+        List list=feedBackService.cursor("select * from g_feedback",GFeedbackEntity.class);
+        String jsonArray=JSON.toJSONString(list);
+        TeacherController.printMessage(response,jsonArray);
+    }
 
 }

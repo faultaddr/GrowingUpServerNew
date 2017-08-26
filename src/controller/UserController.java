@@ -114,10 +114,14 @@ public class UserController {
 
     }
 
-    @RequestMapping("/updateUser")
-    @ResponseBody
-    public String updateUser(ModelMap modelMap) {
-        return "update";
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public void updateUser(ModelMap modelMap,HttpServletResponse response,HttpServletRequest request ,@RequestBody GUserEntity gUserEntity ) {
+        GUsersDao gUsersDao = new GUsersDao();
+        System.out.print(gUserEntity.getUserId());
+        boolean result = gUsersDao.update(gUserEntity);
+        System.out.print(result);
+        TeacherController.printMessage(response,"true");
+
     }
 
 
