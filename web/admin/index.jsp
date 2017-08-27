@@ -31,7 +31,7 @@
     <script>
         function showContent(s){
             alert("aaa");
-            myWindow=window.open('','','width=200,height=100')
+            myWindow=window.open('','','width=1000,height=1000')
             myWindow.document.write("<html lang='en'><head><link rel='stylesheet' href='assets/css/entry.css' /> <div class='entry'><p>" +
                     s+
                 "</p></div></head></html>");
@@ -242,17 +242,7 @@
             <a href="javascript:;"><img src="assets/img/logo.png" alt=""></a>
         </div>
         <!-- 右侧内容 -->
-        <div class="tpl-header-fluid">
-            <!-- 侧边切换 -->
-            <div class="am-fl tpl-header-switch-button am-icon-list">
-                    <span>
 
-                </span>
-            </div>
-            <!-- 搜索 -->
-
-
-        </div>
 
     </header>
     <!-- 风格切换 -->
@@ -287,14 +277,17 @@
 
         <!-- 菜单 -->
         <ul class="sidebar-nav">
-            <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li>
             <li class="sidebar-nav-link">
                 <a href="index.jsp" class="active">
                     <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                 </a>
             </li>
 
-
+            <li class="sidebar-nav-link">
+                <a href="order.jsp" class="active">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> 预定
+                </a>
+            </li>
         </ul>
     </div>
 

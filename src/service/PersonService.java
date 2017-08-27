@@ -25,7 +25,12 @@ public class PersonService {
     }
     public List cursor(String sql,Class mClass){
         DaoFactory<GPersonEntity>daoFactory=new DaoFactory<>();
-        List<GPersonEntity>personList=daoFactory.cursor(null,sql,mClass);
+        List<GPersonEntity>personList= null;
+        try {
+            personList = daoFactory.cursor(null,sql,mClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return personList;
     }
 

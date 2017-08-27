@@ -24,7 +24,12 @@ public class TeacherService {
     }
     public List cursor(String sql, Class mClass){
         DaoFactory<GTeacherEntity>daoFactory=new DaoFactory<>();
-        List<GTeacherEntity>teacherList=daoFactory.cursor(null,sql,mClass);
+        List<GTeacherEntity>teacherList= null;
+        try {
+            teacherList = daoFactory.cursor(null,sql,mClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return teacherList;
     }
 

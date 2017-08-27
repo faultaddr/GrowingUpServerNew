@@ -24,7 +24,12 @@ public class FeedBackService {
     }
     public List cursor(String sql, Class mClass){
         DaoFactory<GFeedbackEntity>daoFactory=new DaoFactory<>();
-        List<GFeedbackEntity>feedBackList=daoFactory.cursor(null,sql,mClass);
+        List<GFeedbackEntity>feedBackList= null;
+        try {
+            feedBackList = daoFactory.cursor(null,sql,mClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return feedBackList;
     }
 }

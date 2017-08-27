@@ -24,9 +24,18 @@ public class TimeService {
         DaoFactory<GTimeEntity>daoFactory=new DaoFactory<>();
         return daoFactory.update(gTimeEntity);
     }
+    public boolean update(String sql){
+        DaoFactory<GTimeEntity>daoFactory=new DaoFactory<>();
+        return daoFactory.update(sql);
+    }
     public List cursor(String sql, Class mClass){
         DaoFactory<GTimeEntity>daoFactory=new DaoFactory<>();
-        List<GTimeEntity>timeList=daoFactory.cursor(null,sql,mClass);
+        List<GTimeEntity>timeList= null;
+        try {
+            timeList = daoFactory.cursor(null,sql,mClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return timeList;
     }
 

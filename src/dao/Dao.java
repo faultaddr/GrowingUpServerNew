@@ -12,6 +12,6 @@ public abstract class Dao<T> {
 
     public abstract boolean update(T u);
 
-    public abstract List cursor(T u, String s, Class aclass);
+    public abstract List cursor(T u, String s, Class aclass)throws Exception;
 
 }

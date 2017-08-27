@@ -39,7 +39,12 @@ public class GUsersDao {
         String userId = GUserEntity.getUserId();
         String passWord = GUserEntity.getUserPassword();
         DaoFactory<GUserEntity> daoFactory = new DaoFactory<>();
-        List<GUserEntity>list = daoFactory.cursor(GUserEntity, "select * from g_user as u where u.user_Id='" + userId + "'", GUserEntity.class);
+        List<GUserEntity>list = null;
+        try {
+            list = daoFactory.cursor(GUserEntity, "select * from g_user as u where u.user_Id='" + userId + "'", GUserEntity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        for (int i = 0; i < list.size(); i++) {
 //            GUserEntity h = (GUserEntity) list.get(i);
 //            System.out.print(h.getHaidaxueSn());
@@ -60,7 +65,12 @@ public class GUsersDao {
     * */
     public GUserEntity getInforByHaidaxue_sn(GUserEntity GUserEntity, String haidaxueSn) {
         DaoFactory<GUserEntity> daoFactory = new DaoFactory<>();
-        List result = daoFactory.cursor(GUserEntity, "select * from h_users where haidaxue_sn='" + haidaxueSn + "'", GUserEntity.class);
+        List result = null;
+        try {
+            result = daoFactory.cursor(GUserEntity, "select * from h_users where haidaxue_sn='" + haidaxueSn + "'", GUserEntity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         GUserEntity h = (GUserEntity) result.get(0);
         return h;
     }
@@ -68,7 +78,12 @@ public class GUsersDao {
     public List<GUserEntity> list() {
         GUserEntity GUserEntity = new GUserEntity();
         DaoFactory<GUserEntity> daoFactory = new DaoFactory<>();
-        List<GUserEntity> result = daoFactory.cursor(GUserEntity, "select * from g_user", GUserEntity.class);
+        List<GUserEntity> result = null;
+        try {
+            result = daoFactory.cursor(GUserEntity, "select * from g_user", GUserEntity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return result;
 
@@ -81,7 +96,12 @@ public class GUsersDao {
     public List getSpecialProfile() {
         DaoFactory<GUserEntity> daoFactory = new DaoFactory<>();
         GUserEntity GUserEntity = new GUserEntity();
-        List<GUserEntity> list = daoFactory.cursor(GUserEntity, "select * from h_users limit 10", GUserEntity.class);
+        List<GUserEntity> list = null;
+        try {
+            list = daoFactory.cursor(GUserEntity, "select * from h_users limit 10", GUserEntity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return list;
     }
 

@@ -24,8 +24,13 @@ public class ArticleService {
     }
     public List cursor(){
         DaoFactory<GArticleEntity>daoFactory=new DaoFactory<>();
-        return daoFactory.cursor(null,"select * from g_article",GArticleEntity.class);
-
+        List list = null;
+        try {
+            list= daoFactory.cursor(null,"select * from g_article",GArticleEntity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
     //目前业务逻辑只有这三个方法
 }
